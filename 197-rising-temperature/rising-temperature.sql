@@ -1,7 +1,4 @@
-with prev_data as(select *,
-lag(temperature) over (order by recordDate) as prev_temp,
-lag(recordDate) over (order by recordDate) as prev_date
-from weather)
-select id from prev_data
-where datediff(recordDate,prev_date) = 1 and 
-temperature>prev_temp;
+select a.id
+from weather as a
+join weather as b on datediff(a.recordDate,b.recorddate) = 1
+where a.temperature>b.temperature;
