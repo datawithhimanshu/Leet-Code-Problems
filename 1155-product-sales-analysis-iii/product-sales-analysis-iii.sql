@@ -1,6 +1,7 @@
-with firstyear as(select product_id,min(year) as first_year
+# Write your MySQL query statement below
+with cte as(select product_id, min(year) as first_year
 from sales
 group by product_id)
-select s.product_id,f.first_year,s.quantity,s.price
-from sales as s
-join firstyear as f on s.product_id = f.product_id and s.year = f.first_year;
+select c.product_id, c.first_year, s.quantity, s.price
+from cte as c
+left join sales as s on c.product_id = s.product_id and c.first_year = s.year;
