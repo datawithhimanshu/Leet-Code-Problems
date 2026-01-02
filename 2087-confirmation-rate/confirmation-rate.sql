@@ -1,4 +1,3 @@
-# Write your MySQL query statement below
 select a.user_id,
 round(count(case when b.action = 'confirmed' then 1 else null end)/count(*),2) as confirmation_rate
 from signups as a
